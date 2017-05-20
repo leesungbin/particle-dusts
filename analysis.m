@@ -67,25 +67,30 @@ for i =1:length(pm10.hr)
         t90(i)=log(0.1)/-b(i)/3600/24;
     %end
 end
+% 
+% count=0;
+% for i = 1:length(t90)
+%     if t90(i)>9.14
+%         count=count+1;
+%     elseif t90(i)<1.39
+%         count=count+1;
+%     end
+% end
+% count
+% 
+% badpm=0;
+% bpmt=[];
+% for i =1:length(t90)
+%     if pm10.pm10(i)>80
+%         badpm=badpm+1;
+%         bpmt(badpm)=t90(i);
+%     end
+% end
+% mean(bpmt)
 
 
-
-count=0;
-for i = 1:length(t90)
-    if t90(i)>9.14
-        count=count+1;
-    elseif t90(i)<1.39
-        count=count+1;
-    end
-end
-count
-
-badpm=0;
-bpmt=[];
-for i =1:length(t90)
-    if pm10.pm10(i)>80
-        badpm=badpm+1;
-        bpmt(badpm)=t90(i);
-    end
-end
-mean(bpmt)
+% for i =[1:length(Nr)]
+%     trange=0:.1:tf(i);
+%     y1=2000*pm10.pm10(i)*exp(-Nr(i)*pi*r(i)^2*v(i)*0.0012*1/2.*trange.^2);
+%     y2=
+% end

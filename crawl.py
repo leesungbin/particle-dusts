@@ -68,7 +68,7 @@ def spider(y,m,o): #year,month,day
                 
                 
                 pyear,pmonth,pobs=pymo1(year,month,obs,i)
-                special_url1='http://openapi.seoul.go.kr:8088/556d7274556c736234364f4b464255/xml/DailyAverageAirQuality/1/5/'+str(pyear)+str(pmonth)+str(pobs)+'/%EB%8F%99%EB%8C%80%EB%AC%B8%EA%B5%AC/'
+                special_url1='http://openapi.seoul.go.kr:8088/(authorized key)/xml/DailyAverageAirQuality/1/5/'+str(pyear)+str(pmonth)+str(pobs)+'/%EB%8F%99%EB%8C%80%EB%AC%B8%EA%B5%AC/'
                 print "checking "+pyear+pmonth+pobs
                 dates=pyear+pmonth+pobs
                 if year==2011 and month==5 and obs+i==31 or year==2011 and month==5 and obs+i==9 or year==2011 and month==5 and obs+i==20:
@@ -77,7 +77,7 @@ def spider(y,m,o): #year,month,day
                     break
                 
                 pyear,pmonth,pobs=pymo2(year,month,obs,i)
-                special_url2='http://openapi.seoul.go.kr:8088/556d7274556c736234364f4b464255/xml/DailyAverageAirQuality/1/5/'+str(pyear)+str(pmonth)+str(pobs)+'/%EB%8F%99%EB%8C%80%EB%AC%B8%EA%B5%AC/'
+                special_url2='http://openapi.seoul.go.kr:8088/(authorized key)/xml/DailyAverageAirQuality/1/5/'+str(pyear)+str(pmonth)+str(pobs)+'/%EB%8F%99%EB%8C%80%EB%AC%B8%EA%B5%AC/'
                 
                 #print pyear,pmonth,pobs
                                                          
