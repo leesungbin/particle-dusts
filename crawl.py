@@ -18,6 +18,8 @@ def spider(y,m,o): #year,month,day
     pm10_data=[]
     #pm25_data=[]
     liter_data=[]
+    power=[]
+    mean_wind=[]
     nope=0
     notadequate=0
     adequate=0
@@ -68,16 +70,16 @@ def spider(y,m,o): #year,month,day
                 
                 
                 pyear,pmonth,pobs=pymo1(year,month,obs,i)
-                special_url1='http://openapi.seoul.go.kr:8088/(authorized key)/xml/DailyAverageAirQuality/1/5/'+str(pyear)+str(pmonth)+str(pobs)+'/%EB%8F%99%EB%8C%80%EB%AC%B8%EA%B5%AC/'
+                special_url1='http://openapi.seoul.go.kr:8088/556d7274556c736234364f4b464255/xml/DailyAverageAirQuality/1/5/'+str(pyear)+str(pmonth)+str(pobs)+'/%EC%A2%85%EB%A1%9C%EA%B5%AC/'#dongdaemoon: '/%EB%8F%99%EB%8C%80%EB%AC%B8%EA%B5%AC/'
                 print "checking "+pyear+pmonth+pobs
                 dates=pyear+pmonth+pobs
-                if year==2011 and month==5 and obs+i==31 or year==2011 and month==5 and obs+i==9 or year==2011 and month==5 and obs+i==20:
-                    print "nodata"
-                    nope+=1
-                    break
+                #if year==2011 and month==5 and obs+i==31 or year==2011 and month==5 and obs+i==9 or year==2011 and month==5 and obs+i==20:
+                 #   print "nodata"
+                  #  nope+=1
+                   # break
                 
                 pyear,pmonth,pobs=pymo2(year,month,obs,i)
-                special_url2='http://openapi.seoul.go.kr:8088/(authorized key)/xml/DailyAverageAirQuality/1/5/'+str(pyear)+str(pmonth)+str(pobs)+'/%EB%8F%99%EB%8C%80%EB%AC%B8%EA%B5%AC/'
+                special_url2='http://openapi.seoul.go.kr:8088/556d7274556c736234364f4b464255/xml/DailyAverageAirQuality/1/5/'+str(pyear)+str(pmonth)+str(pobs)+'/%EC%A2%85%EB%A1%9C%EA%B5%AC/'
                 
                 #print pyear,pmonth,pobs
                                                          
@@ -97,7 +99,7 @@ def spider(y,m,o): #year,month,day
                 #tempm4=str(soup2.select('pm25')[0].string)
                     
                 if tempm1 == 'None' or tempm2=='None' :
-                    print "nope - now"
+                    print "nope - now\n"
                     nope+=1
                     break
                 #elif tempm3=='None' or tempm4=='None':
@@ -112,14 +114,20 @@ def spider(y,m,o): #year,month,day
                         #pm25_data.append([float(tempm3),delta2])
                         hr_data.append([dates,data_matrix[24][i]])
                         liter_data.append(data_matrix[22][i])
-                        print "created data"
+                        mean_wind.append(data_matrix[15][i])
+                        print "created data\n"
+                        power.append(liter_data[adequate]/hr_data[adequate][1])
+                        f.write(str(hr_data[adequate][0])+" "+str(hr_data[adequate][1])+" "+str(pm10_data[adequate][0])+" "+str(pm10_data[adequate][1])+" "+str(power[adequate])+" "+str(mean_wind[adequate])+"\n")
                         adequate+=1
+                        
                     else :
-                        print "not adequate"    
+                        print "not adequate\n"    
                         notadequate+=1
         
         obs+=10
         year,month,obs=sugo(year,month,obs)
+        
+        
         
         
     return (hr_data,pm10_data,liter_data)#,pm25_data)
@@ -209,16 +217,16 @@ def month_type(y,m,o):
         
 
 
-
-
-hr,pm10,power=spider(2003,4,11) #,,pm25
-
-f=open("over20.txt","w")
-f.write("date"+" "+"hr"+ " "+ "pm10" + " " + "delta" + " " + "power")
-for i in range(0,len(hr)):
-    power[i]=power[i]/hr[i][1]
-    f.write(str(hr[i][0])+" "+str(hr[i][1])+" "+str(pm10[i][0])+" "+str(pm10[i][1])+" "+str(power[i])+"\n")
+print '\n\n=================================\nStarts crawling....'
+f=open("over20.txt","a") #'a'
+f.write("date"+" "+"hr"+ " "+ "pm10" + " " + "delta" + " " + "power"+" "+"wind"+"\n")
+hr,pm10,power=spider(2003,5,1) #,,pm25
+#for i in range(0,len(hr)):
+ #   power[i]=power[i]/hr[i][1]
+  #  f.write(str(hr[i][0])+" "+str(hr[i][1])+" "+str(pm10[i][0])+" "+str(pm10[i][1])+" "+str(power[i])+"\n")
 f.close()
+
+
 
 #def calc():
 #    t90=[]
