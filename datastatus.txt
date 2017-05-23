@@ -1,0 +1,10 @@
+data status
+from 20030425 pm10 to 20170521
+missing data: 0
+not adequate : 1
+adequate : 50
+
+from 20120201 pm2.5 to 20170521
+missing data : 4
+not adequate : 1
+adequate : 10

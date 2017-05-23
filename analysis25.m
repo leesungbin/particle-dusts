@@ -31,9 +31,9 @@ powertype=[];
 type=0;
 c=[0,0,0,0,0];
 %over 20
-for i =1:length(pm10.hr)
+for i =1:length(pm25.hr)
     %if pm10.pm10(i)>50
-        x=pm10.power(i);
+        x=pm25.power(i);
         if x<=0.4
             r(i)=1.24/2/1000;
             v(i)=5.53;
@@ -73,8 +73,8 @@ for i =1:length(pm10.hr)
         tf(i)=h/v(i);
         Vpath(i)=pi*r(i)^2*v(i);
         
-        b(i)=log((pm10.pm10(i)+pm10.delta(i))/pm10.pm10(i))/(-1*pm10.hr(i)*3600);
-        a(i)=pm10.pm10(i);
+        b(i)=log((pm25.pm10(i)+pm25.delta(i))/pm25.pm10(i))/(-1*pm25.hr(i)*3600);
+        a(i)=pm25.pm10(i);
         k(i)=b(i)/(Nr(i)*Vpath(i));
         t90(i)=log(0.1)/-b(i)/3600/24;
         powertype(i)=type;
@@ -85,13 +85,13 @@ range=0:10:600000;
 an=[];
 j=1;
 % for j=[1:5]
-    for i=[1:length(pm10.hr)]
-       if powertype(i)==4
+    for i=[1:length(pm25.hr)]
+       
            plot(range,a(i).*exp(-b(i).*range))
            hold on
            an(j)=(log(0.1)/-b(i)/3600/24);
            j=j+1;
-       end
+       
     end
     mean(an)
     max(an)

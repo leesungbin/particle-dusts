@@ -93,23 +93,23 @@ def spider(y,m,o): #year,month,day
                 soup2=BeautifulSoup(plain_text2,'lxml')
                 
                 
-                tempm1=str(soup1.select('pm10')[0].string)
-                tempm2=str(soup2.select('pm10')[0].string)
-                #tempm3=str(soup1.select('pm25')[0].string)
-                #tempm4=str(soup2.select('pm25')[0].string)
+                #tempm1=str(soup1.select('pm10')[0].string)
+                #tempm2=str(soup2.select('pm10')[0].string)
+                tempm3=str(soup1.select('pm25')[0].string)
+                tempm4=str(soup2.select('pm25')[0].string)
                     
-                if tempm1 == 'None' or tempm2=='None' :
-                    print "nope - now\n"
-                    nope+=1
-                    break
-                #elif tempm3=='None' or tempm4=='None':
-                 #   print "nope - yesterday"
+                #if tempm1 == 'None' or tempm2=='None' :
+                 #   print "nope - now\n"
                   #  nope+=1
                    # break
+                if tempm3=='None' or tempm4=='None':
+                    print "nope - yesterday"
+                    nope+=1
+                    break
                 else:
-                    delta1=float(tempm1)-float(tempm2)
+                    delta1=float(tempm3)-float(tempm4)
                     if delta1<0:
-                        pm10_data.append([float(tempm2),delta1])
+                        pm10_data.append([float(tempm4),delta1])
                         #delta2=float(tempm3)-float(tempm4)
                         #pm25_data.append([float(tempm3),delta2])
                         hr_data.append([dates,data_matrix[24][i]])
@@ -220,7 +220,7 @@ def month_type(y,m,o):
 print '\n\n=================================\nStarts crawling....'
 f=open("over20.txt","a") #'a'
 f.write("date"+" "+"hr"+ " "+ "pm10" + " " + "delta" + " " + "power"+" "+"wind"+"\n")
-hr,pm10,power=spider(2003,5,1) #,,pm25
+hr,pm10,power=spider(2012,2,1) #,,pm25
 #for i in range(0,len(hr)):
  #   power[i]=power[i]/hr[i][1]
   #  f.write(str(hr[i][0])+" "+str(hr[i][1])+" "+str(pm10[i][0])+" "+str(pm10[i][1])+" "+str(power[i])+"\n")
